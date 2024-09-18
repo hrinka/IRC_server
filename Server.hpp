@@ -63,7 +63,8 @@ class Server {
   Server &operator=(const Server &other);
   void startServer();
   std::string pass_;
-  void handleJoinCommand(ClientData* client, const std::string& channelName);
+  void handleJoinCommand(ClientData* client, const std::string& channelName);//add
+  std::string handleCommand(std::string message, int i);
 
 };
 void putFunctionError(const char *errmsg);

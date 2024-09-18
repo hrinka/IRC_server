@@ -12,6 +12,7 @@ class Channel {
 public:
     Channel();
     Channel(const std::string& name);
+    
     void addClient(ClientData* client);
     void removeClient(ClientData* client);
     void broadcastMessage(const std::string& message, ClientData* sender);
@@ -25,6 +26,8 @@ public:
     const std::string& getName() const;
     const std::string& getTopic() const;  // トピックを取得するメソッド
     const std::vector<ClientData*>& getClients();  // クライアントリストを取得するメソッド
+        // チャネル関連のメソッド
+
 
 
 private:

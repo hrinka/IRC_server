@@ -72,17 +72,3 @@ void ClientData::sendMessage(const std::string& message) {
         std::cerr << "Error sending message: " << strerror(errno) << std::endl;
     }
 }
-// チャネル関連のメソッド
-void ClientData::joinChannel(Channel& channel) {
-  channel.addClient(this);
-  sendMessage("Joined channel: " + channel.getName());
-}
-
-void ClientData::leaveChannel(Channel& channel) {
-  channel.removeClient(this);
-  sendMessage("Left channel: " + channel.getName());
-}
-
-void ClientData::sendChannelMessage(Channel& channel, const std::string& message) {
-  channel.broadcastMessage(message, this);
-}

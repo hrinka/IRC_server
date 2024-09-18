@@ -34,11 +34,6 @@ class ClientData {  // 一応hostname,servernameも入れておく。
   const std::string& getHostname() const;
   const int getSocket() const;
   void sendMessage(const std::string& message);
-    // チャネル関連のメソッド
-  void joinChannel(Channel& channel);
-  void leaveChannel(Channel& channel);
-  void sendChannelMessage(Channel& channel, const std::string& message);
-
 };
 
 enum user_data { user, host, server, real };

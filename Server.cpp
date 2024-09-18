@@ -29,6 +29,7 @@ void Server::startServer() {
   initSelectArgs(read_fds, max_sock, timeout);
   while (1) {
     setReadfds(read_fds);
+
     max_sock = getMaxSocket();
     sel_ret = select(max_sock + 1, &read_fds, NULL, NULL, &timeout);
     if (sel_ret < 0) putFunctionError("select failed");
@@ -288,3 +289,33 @@ void Server::handleJoinCommand(ClientData* client, const std::string& channelNam
     client->sendMessage(endOfNames);
 }
 
+std::string	Server::handleCommand(std::string message, int i)
+{
+	Request	request(_splitRequest(message));
+
+	if (request.invalidMessage)
+		return ("Invalid message!\n");
+
+	if (request.command == "NICK")
+		return (_setNickName(request, i));
+	// else if (request.command == "OPER") 
+	// 	return (_setOper(request, i));
+	// else if (request.command == "MODE")
+	// 	return (_setMode(request, i));
+	// else if (request.command == "PRIVMSG")
+	// 	return (_privmsg(request, i));
+	// else if (request.command == "NOTICE") 
+	// 	return (_notice(request, i));
+	else if (request.command == "JOIN")
+		return (handleJoinCommand(request, i));
+	// else if (request.command == "TOPIC")
+	// 	return (_topic(request, i));
+	// else if (request.command == "KICK")
+	// 	return (_kick(request, i));
+	// else if (request.command == "PART")
+	// 	return (_part(request, i));
+	// else if (request.command == "QUIT")
+	// 	return (_quit(request, i));
+	else
+		return ("Invalid command\n");
+};
